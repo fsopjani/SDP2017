@@ -2,12 +2,9 @@ package worksheet02;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,6 +13,7 @@ import java.util.stream.Stream;
  */
 public class Main {
 
+    // this scenario caters for both 1 and 2 questions on worksheet02.
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
         System.out.println("Welcome, please type ahead!");
         Scanner scanner = new Scanner(System.in);
@@ -28,7 +26,6 @@ public class Main {
 
             System.out.println("You entered : " + in);
 
-            // 1
             String input = in.contains("worksheet02.") ? in : "worksheet02.".concat(in);
 
             if (input.equalsIgnoreCase("worksheet02.MyFirstClass")) {
@@ -41,7 +38,7 @@ public class Main {
                 }
 
             } else if (input.equalsIgnoreCase("worksheet02.MySecondClass")) {
-                // 2
+
                 Class bClass = Class.forName(input);
                 System.out.println("The class name is: " + bClass.getSimpleName());
 
