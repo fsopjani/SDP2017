@@ -13,6 +13,8 @@ import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
+// NOTE this test unit is only taking care of all the negative scenarios mentioned on the sheet.
+
 public class UnitTestClass {
 
     Class<?> testClass;
