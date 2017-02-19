@@ -10,6 +10,11 @@ public class MyTestClass {
     public String continent;
     private ArrayList<String> planets;
 
+    public MyTestClass(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     private String myHelper01(){
         return "help1";
     }

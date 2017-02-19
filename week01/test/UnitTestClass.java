@@ -5,6 +5,8 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,28 +36,27 @@ public class UnitTestClass {
 
     @Test
     public void anyFieldsOfTypeArray(){
-        Stream.of(testClass.getDeclaredFields()).map(c -> c.getType().toString()).collect(Collectors.toList()).forEach(System.out::println);
         assertThat(Stream.of(testClass.getDeclaredFields()).anyMatch(c -> c.getType().toString().equalsIgnoreCase(ArrayList.class.toString())),Matchers.is(false));
     }
 
     @Test
     public void fewerThanTwoPrivateHelperMethods(){
-
+        assertThat(Stream.of(testClass.getDeclaredMethods()).filter(c -> Modifier.isPrivate(c.getModifiers())).collect(Collectors.toList()).size(), Matchers.lessThan(2));
     }
 
     @Test
-    public void anyMethodsThaThrowsClause(){
-
+    public void anyMethodsThaTThrowsClause(){
+        assertThat(Stream.of(testClass.getDeclaredMethods()).flatMap(c -> Stream.of(c.getExceptionTypes())).map(e -> e).collect(Collectors.toList()).size(), Matchers.is(0));
     }
 
     @Test
     public void anyMethodThatReturnsAnInt(){
-
+        assertThat(Stream.of(testClass.getDeclaredMethods()).map(Method::getGenericReturnType).anyMatch(r -> r.getTypeName().equalsIgnoreCase(Integer.class.toString())),Matchers.is(true));
     }
 
     @Test
     public void missingZeroArgsConstructor(){
-
+        assertThat(Stream.of(testClass.getConstructors()).anyMatch(r -> r.getParameterCount() == 0),Matchers.is(true));
     }
 
 }
