@@ -1,4 +1,7 @@
-public class SmokeSensor implements Sensor {
+package bbk;
+
+public class FireSensor implements Sensor {
+
   @Override
   public boolean isTriggered() {
     return false;

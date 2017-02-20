@@ -1,4 +1,9 @@
-public class FireSensor implements Sensor {
+package bbk;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class SmokeSensor implements Sensor {
   @Override
   public boolean isTriggered() {
     return false;
