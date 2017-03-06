@@ -1,0 +1,9 @@
+sensor:
+  fire: "Fire sensor"
+  smoke: "Smoke sensor"
+
+trigger:
+  yes: "A ${0} sensor was triggered at ${1}"
+  no:  "Polled ${0} at ${1} successfully"
+
+

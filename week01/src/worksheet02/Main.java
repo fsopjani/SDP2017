@@ -12,20 +12,16 @@ import java.util.stream.Stream;
  * Created by fatos on 18/02/2017.
  */
 public class Main {
-
     // this scenario caters for both 1 and 2 questions on worksheet02.
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
-        System.out.println("Welcome, please type ahead!");
+        System.out.println("Welcome, please type ahead the class you'd wish know more about!");
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
             String in = scanner.nextLine();
-
             if (in.equalsIgnoreCase("exit"))
                 break;
-
             System.out.println("You entered : " + in);
-
             String input = in.contains("worksheet02.") ? in : "worksheet02.".concat(in);
 
             if (input.equalsIgnoreCase("worksheet02.MyFirstClass")) {
@@ -36,9 +32,7 @@ public class Main {
                 if (classInterface.isPresent()) {
                     System.out.println("This class has an interface: " + classInterface.get());
                 }
-
             } else if (input.equalsIgnoreCase("worksheet02.MySecondClass")) {
-
                 Class bClass = Class.forName(input);
                 System.out.println("The class name is: " + bClass.getSimpleName());
 
@@ -49,10 +43,8 @@ public class Main {
 
                 conArgs.forEach(System.out::println);
                 Constructor con = bClass.getConstructor(String.class,String.class,Integer.TYPE);
-
-                MySecondClass mysecond = (MySecondClass) con.newInstance("str1","str2",10);
-
-                System.out.print(mysecond.toString());
+                MySecondClass mySecondClass = (MySecondClass) con.newInstance("str1","str2",10);
+                System.out.println("mySecondClass = " + mySecondClass.toString());
             }
             else {
                 System.out.println("Could not find this class!");
