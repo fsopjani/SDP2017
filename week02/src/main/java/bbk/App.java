@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +26,13 @@ public class App implements CommandLineRunner {
   ControlUnit controlUnit;
 
   @Autowired
+  SecurityControlUnit securityControlUnit;
+
+  @Autowired
   SensorConfigurationProperties sensorConfigurationProperties;
+
+  @Autowired
+  ApplicationContext context;
 
   public static void main(String[] args) {
     SpringApplication.run(App.class, args);
@@ -43,18 +50,30 @@ public class App implements CommandLineRunner {
       input = scanner.nextLine();
       if (input.equals(POLL)) {
         controlUnit.pollSensors();
+        securityControlUnit.pollSensors();
       }
     }
   }
 
   private List<Sensor> setUpSensors(){
     sensors = new ArrayList<>();
-    sensors.add(new FireSensor("Lobby 1st floor","Fire sensor"));
-    sensors.add(new SmokeSensor("Lobby 9st floor","Smoke sensor"));
-    sensors.add(new FireSensor("Lobby 5st floor","Fire sensor"));
-    sensors.add(new SmokeSensor("Lobby 2st floor","Smoke sensor"));
-    sensors.add(new FireSensor("Lobby 3st floor","Fire sensor"));
-    sensors.add(new SmokeSensor("Lobby 8st floor","Smoke sensor"));
+    String[] sensorType=  {"fire", "smoke"};
+    int howmany = 2;
+
+
+    for ( int i = 0 ; i< howmany; i++ )
+      for( int j = 0 ; j< sensorType.length; j ++) {
+        sensors.add((Sensor) context.getBean(sensorType[i] + "-sensor", "Lobby 9st floor", "sensorType[i] sensor"));
+      }
+
+
+
+//      // new FireSensor("Lobby 1st floor","Fire sensor"));
+//    sensors.add(new SmokeSensor("Lobby 9st floor","Smoke sensor"));
+//    sensors.add(new FireSensor("Lobby 5st floor","Fire sensor"));
+//    sensors.add(new SmokeSensor("Lobby 2st floor","Smoke sensor"));
+//    sensors.add(new FireSensor("Lobby 3st floor","Fire sensor"));
+//    sensors.add(new SmokeSensor("Lobby 8st floor","Smoke sensor"));
 
     return sensors;
   }

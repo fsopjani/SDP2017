@@ -3,20 +3,10 @@ package bbk;
 /**
  * Created by fatos on 20/02/2017.
  */
-public class MotionSensor implements SecuritySensor {
-    @Override
-    public boolean isTriggered() {
-        return false;
-    }
+public abstract class MotionSensor implements Sensor {
+    public abstract boolean isTriggered();
 
-    @Override
-    public String getLocation() {
-        return null;
-    }
+    public abstract String getLocation();
 
-    @Override
-    public String getSensorType() {
-        return null;
-    }
-
+    public abstract  String getSensorType();
 }

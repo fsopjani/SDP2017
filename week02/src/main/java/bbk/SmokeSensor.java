@@ -1,5 +1,10 @@
 package bbk;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component("smoke-sensor")
+@Scope("prototype")
 public class SmokeSensor implements Sensor {
   private String location;
   private String sensorType;
@@ -26,8 +31,6 @@ public class SmokeSensor implements Sensor {
       System.out.println("Automatic battery charge, why not!");
       batteryPercentage = 100;
     }
-    System.out.println("poll % : " + 100 / pollCount);
-    System.out.println(pollCount + " " + batteryPercentage);
     return false;
   }
 

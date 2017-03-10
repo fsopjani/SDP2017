@@ -3,6 +3,7 @@ package bbk;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * Created by fatos on 20/02/2017.
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "trigger")
+@PropertySource("messages.properties")
 public class TriggerConfigurationProperties {
     private String yes;
     private String no;

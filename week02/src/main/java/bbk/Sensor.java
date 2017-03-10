@@ -1,7 +1,8 @@
 package bbk;
 
-public interface Sensor extends SecuritySensor {
-
+public interface Sensor {
+  boolean isTriggered ();
+  String getLocation();
+  String getSensorType();
   int getBatteryPercentage();
-
 }

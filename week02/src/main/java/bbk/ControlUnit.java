@@ -1,9 +1,12 @@
 package bbk;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import java.text.MessageFormat;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class ControlUnit {
   private List<Sensor> sensors;
 
@@ -14,9 +17,9 @@ public class ControlUnit {
 
     for (Sensor sensor : sensors) {
       if (sensor.isTriggered()) {
-        System.out.println("A " + sensor.getSensorType() + " sensor was triggered at " + sensor.getLocation());
+        System.out.println(MessageFormat.format(triggerConfigurationProperties.getYes(), sensor.getSensorType(), sensor.getLocation()));
       } else {
-        System.out.println("Polled " + sensor.getSensorType() + " at " + sensor.getLocation() + " successfully");
+        System.out.println(MessageFormat.format(triggerConfigurationProperties.getNo(), sensor.getSensorType(), sensor.getLocation()));
       }
     }
   }
@@ -24,4 +27,6 @@ public class ControlUnit {
   public void setSensors(List<Sensor> sensors) {
     this.sensors = sensors;
   }
+
+
 }
