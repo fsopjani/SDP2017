@@ -1,5 +1,9 @@
 package bbk;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,8 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
-import java.util.Scanner;
-
 @EnableAutoConfiguration
 @Component
 @ComponentScan("bbk")
@@ -17,6 +19,7 @@ import java.util.Scanner;
 public class App implements CommandLineRunner {
   private static final String EXIT = "exit";
   private static final String POLL = "poll";
+  private List<Sensor> sensors;
 
   @Autowired
   ControlUnit controlUnit;
@@ -32,6 +35,7 @@ public class App implements CommandLineRunner {
   @Override
   public void run(String... strings) throws Exception {
     System.out.println(sensorConfigurationProperties.getFire());
+    controlUnit.setSensors(setUpSensors());
     Scanner scanner = new Scanner(System.in);
     String input = "";
     while (!input.equals(EXIT)) {
@@ -41,5 +45,17 @@ public class App implements CommandLineRunner {
         controlUnit.pollSensors();
       }
     }
+  }
+
+  private List<Sensor> setUpSensors(){
+    sensors = new ArrayList<>();
+    sensors.add(new FireSensor("Lobby 1st floor","Fire sensor"));
+    sensors.add(new SmokeSensor("Lobby 9st floor","Smoke sensor"));
+    sensors.add(new FireSensor("Lobby 5st floor","Fire sensor"));
+    sensors.add(new SmokeSensor("Lobby 2st floor","Smoke sensor"));
+    sensors.add(new FireSensor("Lobby 3st floor","Fire sensor"));
+    sensors.add(new SmokeSensor("Lobby 8st floor","Smoke sensor"));
+
+    return sensors;
   }
 }
