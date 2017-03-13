@@ -5,15 +5,17 @@ import org.springframework.stereotype.Component;
 
 @Component("smoke-sensor")
 @Scope("prototype")
-public class SmokeSensor implements Sensor {
+public class SmokeSensor extends HazardSensor {
   private String location;
   private String sensorType;
-  private int batteryPercentage;
+  private String sensorCategory;
+  private double batteryPercentage;
   private int pollCount = 0;
 
-  public SmokeSensor(String location, String sensorType) {
+  public SmokeSensor(String location, String sensorType, String sensorCategory) {
     this.location = location;
     this.sensorType = sensorType;
+    this.sensorCategory = sensorCategory;
     this.batteryPercentage = 100;
   }
 
@@ -45,7 +47,12 @@ public class SmokeSensor implements Sensor {
   }
 
   @Override
-  public int getBatteryPercentage() {
+  public String getSensorCategory() {
+    return sensorCategory;
+  }
+
+  @Override
+  public double getBatteryPercentage() {
     return batteryPercentage;
   }
 }

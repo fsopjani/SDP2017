@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SecurityControlUnit extends ControlUnit {
-
-    MotionSensor sensor;
-
     @Override
     public void pollSensors() {
         if (LocalTime.now().isAfter(LocalTime.parse( "22:00:00" )) && LocalTime.now().isBefore(LocalTime.parse( "06:00:00" ))) {

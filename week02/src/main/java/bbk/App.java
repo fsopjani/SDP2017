@@ -3,6 +3,7 @@ package bbk;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Component;
 public class App implements CommandLineRunner {
   private static final String EXIT = "exit";
   private static final String POLL = "poll";
-  private List<Sensor> sensors;
 
   @Autowired
   ControlUnit controlUnit;
@@ -41,8 +41,8 @@ public class App implements CommandLineRunner {
 
   @Override
   public void run(String... strings) throws Exception {
-    System.out.println(sensorConfigurationProperties.getFire());
-    controlUnit.setSensors(setUpSensors());
+    controlUnit.setSensors(setUpSensors().stream().filter(p -> p.getSensorCategory().equals("Hazard")).collect(Collectors.toList()));
+    securityControlUnit.setSensors(setUpSensors().stream().filter(p -> p.getSensorCategory().equals("Security")).collect(Collectors.toList()));
     Scanner scanner = new Scanner(System.in);
     String input = "";
     while (!input.equals(EXIT)) {
@@ -56,25 +56,15 @@ public class App implements CommandLineRunner {
   }
 
   private List<Sensor> setUpSensors(){
-    sensors = new ArrayList<>();
-    String[] sensorType=  {"fire", "smoke"};
-    int howmany = 2;
-
-
-    for ( int i = 0 ; i< howmany; i++ )
-      for( int j = 0 ; j< sensorType.length; j ++) {
-        sensors.add((Sensor) context.getBean(sensorType[i] + "-sensor", "Lobby 9st floor", "sensorType[i] sensor"));
-      }
-
-
-
-//      // new FireSensor("Lobby 1st floor","Fire sensor"));
-//    sensors.add(new SmokeSensor("Lobby 9st floor","Smoke sensor"));
-//    sensors.add(new FireSensor("Lobby 5st floor","Fire sensor"));
-//    sensors.add(new SmokeSensor("Lobby 2st floor","Smoke sensor"));
-//    sensors.add(new FireSensor("Lobby 3st floor","Fire sensor"));
-//    sensors.add(new SmokeSensor("Lobby 8st floor","Smoke sensor"));
-
+    List<Sensor> sensors = new ArrayList<>();
+    sensors.add(new SmokeSensor("Lobby 9st floor","Smoke sensor","Hazard"));
+    sensors.add(new FireSensor("Lobby 5st floor","Fire sensor","Hazard"));
+    sensors.add(new SmokeSensor("Lobby 2st floor","Smoke sensor","Hazard"));
+    sensors.add(new FireSensor("Lobby 3st floor","Fire sensor","Hazard"));
+    sensors.add(new SmokeSensor("Lobby 8st floor","Smoke sensor","Hazard"));
+    sensors.add(new MotionSensor("Lobby 1st floor","Motion sensor","Security"));
+    sensors.add(new MotionSensor("Lobby 2st floor","Motion sensor","Security"));
+    sensors.add(new MotionSensor("Lobby 3st floor","Motion sensor","Security"));
     return sensors;
   }
 }
