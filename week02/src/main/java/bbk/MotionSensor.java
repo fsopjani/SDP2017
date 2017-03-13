@@ -1,8 +1,13 @@
 package bbk;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 /**
  * Created by fatos on 20/02/2017.
  */
+@Component("motion-sensor")
+@Scope("prototype")
 public class MotionSensor extends SecuritySensor {
     private String location;
     private String sensorType;
