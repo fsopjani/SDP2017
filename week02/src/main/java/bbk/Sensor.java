@@ -5,5 +5,4 @@ public interface Sensor {
   String getLocation();
   String getSensorType();
   String getSensorCategory();
-  //int getBatteryPercentage();
 }
