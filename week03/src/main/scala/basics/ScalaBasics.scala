@@ -56,7 +56,17 @@ object ScalaBasics {
    * @param r the array of integers
    * @return the minimum integer in the array
    */
-  def minWhile(r: Array[Int]): Int = ???
+  def minWhile(r: Array[Int]): Int = {
+    var indexVar = 0
+    var min: Int = Int.MaxValue
+    while (indexVar < r.length) {
+      if(r(indexVar) < min) {
+        min = r(indexVar)
+      }
+      indexVar=indexVar+1
+    }
+    min
+  }
 
   /**
    * Write a function that returns the minimum integer in the Array r.
@@ -72,10 +82,8 @@ object ScalaBasics {
    */
   def minFor(r: Array[Int]): Int = {
     var min: Int = Int.MaxValue
-    for (n <- r) {
-      if (n < min) {
-        min = n
-      }
+    for (x <- r.toList.sortWith(_>_)){
+      min = x
     }
     min
   }
@@ -158,11 +166,10 @@ object ScalaBasics {
    */
   def isPalindrome(s: String): Boolean = {
     val x = s.replaceAll("[^A-Za-z]+", "").toLowerCase
-    for (i <- 0 until x.length){
-        if (x.charAt(i) != x.reverse.charAt(i)) {
-          return false
-        }
-    }
+    for (i <- 0 until x.length)
+      yield  if (x.charAt(i) != x.reverse.charAt(i)) {
+        return false
+      }
     true
   }
 
@@ -207,6 +214,8 @@ object ScalaBasics {
    * @param lines the lines of a text file
    * @return a map from words to the number of times that word was seen
    */
-  def wordCounter(lines: Array[String]): Map[String, Int] = ???
+  def wordCounter(lines: Array[String]): Map[String, Int] = {
+    lines.flatMap(w => w.split(" ")).toList.groupBy((word: String) => word).mapValues(w => w.length)
+  }
 
 }
