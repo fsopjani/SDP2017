@@ -9,15 +9,23 @@
 //
 //}
 
-case class Counter(n: Int = 0) {
+class Adder(amount: Int) {
+  def add(in: Int) = in + amount
+}
+
+case class Counter(n: Int = 0){
   def inc =  this.copy(n + 1)
   def dec = this.copy(n - 1)
+  val count = n
 
-   val count = n
+  def adjust(adder: Adder): Counter = {
+    Counter.apply(adder.add(n))
+  }
 
 }
 
 object AppMain extends App{
-  val c = new Counter(10).inc.dec.inc.inc.count
-  println(c)
+  val c = new Counter(10)
+  val adder = new Adder(5)
+  println(c.adjust(adder).n)
  }
