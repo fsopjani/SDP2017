@@ -1,21 +1,6 @@
 package films
 
-case class Director(firstName: String, lastName: String, yearOfBirth: Int){
-  def name: String = firstName + " " + lastName
-}
-
-case class Film(name: String, yearOfRelease: Int, imdbRating: Double, director: Director) {
-
-  def directorsAge = director.yearOfBirth
-
-  def isDirectedBy(d: Director): Boolean = {
-    d.name == director.name
-  }
-
-  def copy: Film ={
-    new Film(name: String, yearOfRelease: Int, imdbRating: Double, director: Director)
-  }
-}
+import excercise.{Director, Film}
 
 object FilmTest extends App {
   val eastwood = new Director("Clint", "Eastwood", 1930)
@@ -41,6 +26,22 @@ object FilmTest extends App {
   println(eastwood.yearOfBirth) // should be 1930
   println(dieHard.director.name)// should be "John McTiernan"
   println(invictus.isDirectedBy(nolan)) // should be false
+  println(predator.copy(name = "Something else"))
+
+  val d1 = new Director("Christopher", "Nolan", 1970)
+  val d2 = new Director("Just", "Some Guy", 1990)
+
+  println(Director.older(d1,d2))
+
+  val dirAge1 = new Film("Invictus", 2009, 7.4, eastwood)
+  val dirAge2 = new Film("Predator", 1987, 7.9, mcTiernan)
+
+  println(Film.oldestDirectorAtTheTime(dirAge1,dirAge2))
+
+  val imdbPredator = Film.apply("Predator", 1987, 7.9, mcTiernan)
+  val imdvInvictus = Film("Invictus", 2009, 7.4, eastwood)
+  val imdb = Film.highestRating(imdbPredator,imdvInvictus)
+  println(imdb.name)
 
 
 }
