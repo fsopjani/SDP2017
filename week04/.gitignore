@@ -1,7 +1,4 @@
-.idea
-.metadata
-.settings
+/bin
 .classpath
 .project
-*.iml
-target/
+.settings/
