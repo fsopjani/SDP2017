@@ -1,5 +1,5 @@
 package observer
 
-trait Commentary {
+trait Commentary extends Subject{
   def setDesc(desc: String)
 }
