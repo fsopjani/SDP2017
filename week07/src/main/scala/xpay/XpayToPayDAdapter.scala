@@ -3,45 +3,49 @@ package xpay
 /**
   * Created by fatos on 30/03/2017.
   */
-class XpayToPayDAdapter(var xpay: XpayImpl)extends PayD{
-
-  override def getCustCardNo: String = {
-    xpay.getCreditCardNo
+class XpayToPayDAdapter( var payD: PayD)extends Xpay{
+  override def getCreditCardNo: String = {
+    payD.getCustCardNo
   }
 
-  override def setCVVNo(cVVNo: Integer): Unit = {
-    xpay.setCardCVVNo(cVVNo.shortValue())
+  override def setCreditCardNo(creditCardNo: String): Unit = {
+    payD.setCustCardNo(creditCardNo)
   }
 
-  override def setCardExpMonthDate(cardExpMonthDate: String): Unit = {
-    xpay.setCardExpMonth(cardExpMonthDate)
+  override def getCustomerName: String = {
+    payD.getCardOwnerName
   }
 
-  override def getCardExpMonthDate: String = {
-    xpay.getCardExpMonth
+  override def setCustomerName(customerName: String): Unit = {
+    payD.setCardOwnerName(customerName)
   }
 
-  override def setCardOwnerName(cardOwnerName: String): Unit = {
-    xpay.setCustomerName(cardOwnerName)
+  //format dd-mm-yyyy
+  override def getCardExpMonth: String = payD.getCardExpMonthDate.split("-")(0)
+
+  //format dd-mm-yyyy
+  override def setCardExpMonth(cardExpMonth: String): Unit = {
+    payD.setCardExpMonthDate(payD.getCardExpMonthDate.split("-")(1))
+  }
+  //format dd-mm-yyyy
+  override def getCardExpYear: String = {
+    payD.getCardExpMonthDate.split("-")(2)
   }
 
-  override def getTotalAmount: Double = {
-    xpay.getAmount
+  //format dd-mm-yyyy
+  override def setCardExpYear(cardExpYear: String): Unit = {
+    payD.setCardExpMonthDate(payD.getCardExpMonthDate.split("-")(2))
   }
 
-  override def setCustCardNo(custCardNo: String): Unit = {
-    xpay.setCreditCardNo(custCardNo)
+  override def getCardCVVNo: Short = payD.getCVVNo.toShort
+
+  override def setCardCVVNo(cardCVVNo: Short): Unit = {
+    payD.setCVVNo(cardCVVNo.toInt)
   }
 
-  override def getCardOwnerName: String = {
-    xpay.getCreditCardNo
-  }
+  override def getAmount: Double = payD.getTotalAmount
 
-  override def getCVVNo: Integer = {
-    xpay.getCardCVVNo.toInt
-  }
-
-  override def setTotalAmount(totalAmount: Double): Unit = {
-    xpay.setAmount(totalAmount)
+  override def setAmount(amount: Double): Unit = {
+    payD.setTotalAmount(amount)
   }
 }
