@@ -6,10 +6,22 @@ package singleton
 class SingletonLazyCheck private (){
   def printHi() = println("hi fatos")
 
-
 }
 
 object SingletonLazyCheck {
-  lazy val INSTANCE = new SingletonLazyCheck
-  def apply() = INSTANCE
+  private lazy val instance: SingletonLazyCheck = new SingletonLazyCheck
+  def apply(): SingletonLazyCheck = {
+    instance
+  }
+
+}
+
+object SingletonMain extends App {
+
+  val y = SingletonLazyCheck()
+
+  println(y)
+  y.printHi()
+  println(y)
+
 }
