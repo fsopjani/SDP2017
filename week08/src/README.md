@@ -5,3 +5,6 @@ and choosing one to use while the application is running.
 The strategy design pattern helps with encapsulation as each algorithm can be separately
 defined and then injected into the classes that use it. The different implementations are
 also interchangeable.
+
+
+3.

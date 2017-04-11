@@ -3,6 +3,8 @@ package strategy
 // TODO
 
 case class TextEditor(formatter: TextFormatter) {
-  def publishText(s: String) = ???
-
+  def publishText(s: String) = formatter match {
+    case _: CapTextFormatter => formatter.format(s)
+    case _: LowerTextFormatter => formatter.format(s)
+  }
 }
