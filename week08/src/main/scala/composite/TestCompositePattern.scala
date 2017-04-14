@@ -23,5 +23,6 @@ object TestCompositePattern extends App {
     child1.setTagBody("Paragraph 2")
 
     p1.addChildTag(child1)
+    //p1.removeChildTag(child1)
     parentTag.generateHtml
 }

@@ -36,3 +36,15 @@
 
     The bridge design pattern eliminates a problem by directly implementing an abstraction,
     thus making the abstractions and implementations reusable and easier to change.
+
+11.
+
+    What is the Composite Pattern?
+
+    The composite is a partitioning design pattern that represents a group of objects that are to
+    be treated as only one object.
+
+    Under what conditions would you use a Composite Design Pattern?
+
+
+    What are the four participants of the Composite Design Pattern?
