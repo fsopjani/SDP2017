@@ -2,10 +2,10 @@ package chain
 
 case class DocFileHandler(s: String) extends Handler {
 
-  var next: Handler = null
+  var next: Option[Handler] = None: Option[Handler]
 
   override def setHandler(handler: Handler): Unit = {
-    next = handler
+    next = Some(handler)
   }
 
   override def process(file: File): Unit = {
@@ -14,7 +14,7 @@ case class DocFileHandler(s: String) extends Handler {
     }
     else {
       println("Doc Handler forwards request to Excel Handler")
-      next.process(file)
+      next.get.process(file)
     }
   }
 
