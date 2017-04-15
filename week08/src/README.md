@@ -1,13 +1,11 @@
 1.
 
-
     Strategy design pattern is a behavioural pattern, strategy pattern is an implementation of different specific algorithms
     and choosing one to use while the application is running.
 
     The strategy design pattern helps with encapsulation as each algorithm can be separately
     defined and then injected into the classes that use it. The different implementations are
     also interchangeable.
-
 
 3.
 
@@ -23,7 +21,6 @@
     than using class constructors, this is particularly useful in cases where a class needs to cater multiple scenarios
     which require multiple versions of constructor. This can be quite limiting when in cases where needed to create instances
     of class a constructor is not defined for a particular need.
-
 
 7.
 
