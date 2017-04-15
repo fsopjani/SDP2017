@@ -19,6 +19,12 @@
 
 5.
 
+    The builder design pattern helps to create instances of classes using class methods (builder method) rather
+    than using class constructors, this is particularly useful in cases where a class needs to cater multiple scenarios
+    which require multiple versions of constructor. This can be quite limiting when in cases where needed to create instances
+    of class a constructor is not defined for a particular need.
+
+
 7.
 
     a. This is a structural pattern as it defines a manner for creating relationships between classes or entities.
@@ -39,12 +45,11 @@
 
 11.
 
-    What is the Composite Pattern?
-
     The composite is a partitioning design pattern that represents a group of objects that are to
     be treated as only one object.
 
-    Under what conditions would you use a Composite Design Pattern?
-
+    Its purpose is to compose objects into tree structures to represent whole-part hierarchies.
+    The composite design pattern is useful for removing code duplication and avoiding errors
+    in cases where groups of objects are generally treated the same way.
 
     What are the four participants of the Composite Design Pattern?
