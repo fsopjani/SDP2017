@@ -4,9 +4,18 @@ import java.util.Iterator
 
 class ShapeIterator(private var shapes: Array[Shape]) extends Iterator[Shape] {
 
-  override def hasNext(): Boolean = ???
+  var currentPos = 0
 
-  override def next(): Shape = ???
+  override def hasNext(): Boolean = currentPos < shapes.length
 
-  override def remove(): Unit = ???
+  override def next(): Shape = {
+    val result = shapes(currentPos)
+    currentPos = currentPos + 1
+    result
+  }
+
+  override def remove(): Unit = {
+    shapes.take(currentPos)
+    currentPos = currentPos + 1
+  }
 }
