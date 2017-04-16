@@ -1,8 +1,9 @@
 package prototype
 
-class AccessControl(val controlLevel: String,
-                    var access: String)
-    extends Prototype {
+class AccessControl(val controlLevel: String, var access: String) extends Prototype {
 
-  override def clone(): AccessControl = ???
+  override def clone(): AccessControl = {
+    this.clone()
+  }
+
 }
