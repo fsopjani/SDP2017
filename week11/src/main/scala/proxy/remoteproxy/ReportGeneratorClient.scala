@@ -4,6 +4,10 @@ import java.rmi.Naming
 
 object ReportGeneratorClient extends App {
   // YOUR CODE GOES HERE
+  val reportGeneratorClient = new ReportGeneratorClient()
+
+  reportGeneratorClient.generateReport()
+
 }
 
 class ReportGeneratorClient {
